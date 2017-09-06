@@ -8,7 +8,7 @@ BlinkenJS is much simpler than the original Blinken - only Icinga is supported a
 
 ## How to run
 
-1. Copy `config-example.js` to `config.js` and edit it to define your groups, environments and Icings URLs.
+1. Copy `config-example.js` to `config.js` and edit it to define your groups, environments and Icinga URLs.
 2. Open `blinken.html` in your browser.
 
 The page will automatically refresh once a minute.
