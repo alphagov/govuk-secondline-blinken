@@ -13,6 +13,8 @@ BlinkenJS is much simpler than the original Blinken - only Icinga is supported a
 
 The page will automatically refresh once a minute.
 
+**Note** In order for this script to be able to access your Icinga instances, you must ensure that at least the file `/cgi-bin/icinga/status.cgi` returns the HTTP header `Access-Control-Allow-Origin: *`.
+
 ## Screenshot
 
 ![Screenshot of BlinkenJS in action](docs/screenshot.png)
