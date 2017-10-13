@@ -3,8 +3,14 @@
 }
 
 .blinken-environment {
+  display: block;
   height: 200px;
   border-right: 10px solid #fff;
+  color: #fff;
+}
+
+.blinken-environment:hover {
+  text-decoration: none;
   color: #fff;
 }
 
