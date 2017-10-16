@@ -3,6 +3,9 @@
 <head><title>GOV.UK Blinken Settings</title></head>
 <body>
 
+<h1>GOV.UK Blinken Settings</h1>
+
+<h2>Icinga URLs</h2>
 <div>
   <label for="production-url">Production Icinga URL</label>
   <input id="production-url" type="text"/>
@@ -18,9 +21,71 @@
   <input id="integration-url" type="text"/>
 </div>
 
+<h2>Polling</h2>
 <div>
   <label for="polling-interval">Polling Interval (secs)</label>
-  <input id="polling-interval" type="text" />
+  <input id="polling-interval" type="text"/>
+</div>
+
+<h2>Notifications</h2>
+<h3>Production</h3>
+<div>
+  <label for="production-notification-critical">
+    <input type="checkbox" id="production-notification-critical" />
+    Critical
+  </label>
+</div>
+<div>
+  <label for="production-notification-warning">
+    <input type="checkbox" id="production-notification-warning" />
+    Warning
+  </label>
+</div>
+<div>
+  <label for="production-notification-ok">
+    <input type="checkbox" id="production-notification-ok" />
+    OK
+  </label>
+</div>
+
+<h3>Staging</h3>
+<div>
+  <label for="staging-notification-critical">
+    <input type="checkbox" id="staging-notification-critical" />
+    Critical
+  </label>
+</div>
+<div>
+  <label for="staging-notification-warning">
+    <input type="checkbox" id="staging-notification-warning" />
+    Warning
+  </label>
+</div>
+<div>
+  <label for="staging-notification-ok">
+    <input type="checkbox" id="staging-notification-ok" />
+    OK
+  </label>
+</div>
+
+<h3>Integration</h3>
+<div>
+  <label for="integration-notification-critical">
+    <input type="checkbox" id="integration-notification-critical" />
+    Critical
+  </label>
+</div>
+<div>
+  <label for="integration-notification-warning">
+    <input type="checkbox" id="integration-notification-warning" />
+    Warning
+  </label>
+</div>
+<div>
+  <label for="integration-notification-ok">
+    <input type="checkbox" id="integration-notification-ok" />
+    OK
+  </label>
 </div>
 
 <div id="status"></div>

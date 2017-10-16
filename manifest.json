@@ -17,6 +17,7 @@
   "options_page": "chrome/options.html",
 
   "permissions": [
-    "storage"
+    "storage",
+    "notifications"
   ]
 }
