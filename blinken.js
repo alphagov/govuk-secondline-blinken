@@ -11,11 +11,20 @@
   };
 
   Blinken.prototype.getConfig = function() {
+    var chromeExtensionConfig = chrome &&
+      chrome.extension &&
+      chrome.extension.getBackgroundPage() &&
+      chrome.extension.getBackgroundPage().blinken_config;
+
+    if (chromeExtensionConfig) {
+      window.blinken_config = chromeExtensionConfig;
+    }
+
     // Looks for the global variable `blinken_config` which is defined in config.js
-    if (typeof blinken_config === "undefined") {
+    if (typeof window.blinken_config === "undefined") {
       throw new Error("Cannot find blinken_config global variable (have you included config.js in blinken.html?)");
     }
-    return blinken_config;
+    return window.blinken_config;
   };
 
   Blinken.prototype.getStatuses = function() {
@@ -39,17 +48,18 @@
       var service_status = data.status.service_status;
       var critical_entries = service_status.filter(function(o) { return o.status === "CRITICAL" && o.has_been_acknowledged === false }).length;
       var warning_entries = service_status.filter(function(o) { return o.status === "WARNING" && o.has_been_acknowledged === false }).length;
-      self.setStatus(group_id, environment_name, critical_entries, warning_entries);
+      self.setStatus(group_id, environment_name, environment_url, critical_entries, warning_entries);
     });
   };
 
-  Blinken.prototype.setStatus = function(group_id, environment_name, critical_entries, warning_entries) {
+  Blinken.prototype.setStatus = function(group_id, environment_name, environment_url, critical_entries, warning_entries) {
     this.status[group_id] = this.status[group_id] || {};
     this.status[group_id][environment_name] = {
       "environment_name": environment_name,
+      "environment_url": environment_url,
       "timestamp": (new Date()).toLocaleString("en-GB", { "hour12": false }),
       "critical_entries": critical_entries,
-      "warning_entries": warning_entries
+      "warning_entries": warning_entries,
     };
     var environment_count = this.stats[group_id].number_of_environments;
     var environment_status_count = Object.keys(this.status[group_id]).length;
@@ -66,7 +76,7 @@
         var environment_style_class = self.getEnvironmentStyleClass(environment.critical_entries, environment.warning_entries);
         var critical_entries = self.getEntryHTML("critical", "Criticals", environment.critical_entries);
         var warning_entries = self.getEntryHTML("warning", "Warnings", environment.warning_entries);
-        var environment_block = '<div class="col-md-3 blinken-environment ' + environment_style_class + '"><h2>' + environment.environment_name + '</h2><p>' + environment.timestamp + '</p>' + critical_entries + warning_entries + '</div>';
+        var environment_block = '<a href="' + environment.environment_url + '" target="_blank" class="col-md-3 blinken-environment ' + environment_style_class + '"><h2>' + environment.environment_name + '</h2><p>' + environment.timestamp + '</p>' + critical_entries + warning_entries + '</a>';
         self.$container.children("#" + group_id).append(environment_block);
       }
     });
