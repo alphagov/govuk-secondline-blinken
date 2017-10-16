@@ -19,6 +19,43 @@ The page will automatically refresh once a minute.
 
 ![Screenshot of BlinkenJS in action](docs/screenshot.png)
 
+## Chrome extension
+
+The Blinken page has also been wrapped up in a Chrome extension, for a quick overview of the service status.
+
+### Installation
+
+The extension can be installed directly from this repository:
+
+1. [Download the source][source] and unzip
+2. Visit [chrome://extensions][extensions] in Chrome
+3. Check the "Developer mode" checkbox
+4. Click "Load unpacked extension..."
+5. Navigate to the root of this project - `/blinkenjs` - and select it
+
+After installation you should see a little grey icon in your toolbar. When you don't want to see it, you can right-click it and hide it.
+
+### Configuration
+
+You will need to point the extension at the Icinga alert pages in order to use it. To do this, open up your [extensions][extensions], and find the "GOV.UK Blinken" extension. Click "Options". On this page, you should type the Icinga URLs for each environment and click "Save". Once they have been successfully configured, you should see the icon change colour in the corner.
+
+### Usage
+
+The icon uses the Blinken traffic light system:
+
+- Green means no warnings
+- Amber means some warnings, but no critical alerts
+- Red means some critical alerts
+
+The big block across the top of the icon represents Production. The medium-sized one at the bottom-left represents
+Staging, and the small block in the bottom-right represents Integration.
+
+Clicking on the icon will open up the Blinken page with more information. Each environment can be clicked to be taken
+to the corresponding Icinga page.  
+
+[source]: https://github.com/alphagov/blinkenjs/archive/master.zip
+[extensions]: chrome://extensions
+
 ## Licence
 
 [MIT License](LICENCE)
