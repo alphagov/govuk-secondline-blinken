@@ -1,12 +1,13 @@
 (function () {
   var DEFAULT_POLLING_INTERVAL_SECS = 10;
+  var ENVIRONMENTS = [
+    "production",
+    "staging",
+    "integration"
+  ];
 
   function saveOptions() {
-    var icingaUrls = [
-      "production",
-      "staging",
-      "integration"
-    ].reduce(function (urlsByEnvironment, environment) {
+    var icingaUrls = ENVIRONMENTS.reduce(function (urlsByEnvironment, environment) {
       urlsByEnvironment[environment] = document.getElementById(environment + "-url").value;
       return urlsByEnvironment;
     }, {});
@@ -16,9 +17,20 @@
       pollingIntervalSecs = DEFAULT_POLLING_INTERVAL_SECS;
     }
 
+    var notificationsEnabled = ENVIRONMENTS.reduce(function (enabledByEnvironment, environment) {
+      enabledByEnvironment[environment] = ["critical", "warning", "ok"]
+        .reduce(function (enabledByStatus, status) {
+          enabledByStatus[status] = document.getElementById(environment + "-notification-" + status).checked;
+          return enabledByStatus;
+        }, {});
+
+      return enabledByEnvironment;
+    }, {});
+
     chrome.storage.sync.set({
       icingaUrls: icingaUrls,
-      pollingIntervalSecs: pollingIntervalSecs
+      pollingIntervalSecs: pollingIntervalSecs,
+      notificationsEnabled: notificationsEnabled
     }, notifySaveSuccess);
   }
 
@@ -33,7 +45,8 @@
   function restoreOptions() {
     chrome.storage.sync.get({
       icingaUrls: {},
-      pollingIntervalSecs: DEFAULT_POLLING_INTERVAL_SECS
+      pollingIntervalSecs: DEFAULT_POLLING_INTERVAL_SECS,
+      notificationsEnabled: {}
     }, populateInputs);
   }
 
@@ -45,6 +58,15 @@
       });
 
     document.getElementById("polling-interval").value = options.pollingIntervalSecs;
+
+    var notificationsEnabled = options.notificationsEnabled;
+    Object.keys(notificationsEnabled)
+      .forEach(function (environment) {
+        var notificationsByStatus = notificationsEnabled[environment];
+        Object.keys(notificationsByStatus).forEach(function (status) {
+          document.getElementById(environment + '-notification-' + status).checked = notificationsByStatus[status];
+        });
+      });
   }
 
   document.addEventListener('DOMContentLoaded', restoreOptions);

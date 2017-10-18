@@ -53,6 +53,12 @@ Staging, and the small block in the bottom-right represents Integration.
 Clicking on the icon will open up the Blinken page with more information. Each environment can be clicked to be taken
 to the corresponding Icinga page.  
 
+### Notifications
+
+The extension can also display system-wide notifications when the status of an environment changes. Clicking the notification will open the corresponding Icinga page.
+
+These notificatons can be enabled/disabled on the extension settings page. Notifications can be toggled for each environment, and for each status.
+
 [source]: https://github.com/alphagov/blinkenjs/archive/master.zip
 [extensions]: chrome://extensions
 
