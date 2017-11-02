@@ -1,5 +1,7 @@
 body {
   min-width: 600px;
+  background-color: #000;
+  color: #fff;
 }
 
 .container-fluid {
@@ -9,7 +11,7 @@ body {
 .blinken-environment {
   display: block;
   height: 200px;
-  border-right: 10px solid #fff;
+  border-right: 10px solid #000;
   color: #fff;
 }
 
