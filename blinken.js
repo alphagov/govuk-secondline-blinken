@@ -76,7 +76,7 @@
         var environment_style_class = self.getEnvironmentStyleClass(environment.critical_entries, environment.warning_entries);
         var critical_entries = self.getEntryHTML("critical", "Criticals", environment.critical_entries);
         var warning_entries = self.getEntryHTML("warning", "Warnings", environment.warning_entries);
-        var environment_block = '<a href="' + environment.environment_url + '" target="_blank" class="col-md-3 blinken-environment ' + environment_style_class + '"><h2>' + environment.environment_name + '</h2><p>' + environment.timestamp + '</p>' + critical_entries + warning_entries + '</a>';
+        var environment_block = '<a href="' + environment.environment_url + '" target="_blank" class="col-xs-4 blinken-environment ' + environment_style_class + '"><h2>' + environment.environment_name + '</h2><p>' + environment.timestamp + '</p>' + critical_entries + warning_entries + '</a>';
         self.$container.children("#" + group_id).append(environment_block);
       }
     });
