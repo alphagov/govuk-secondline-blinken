@@ -45,13 +45,11 @@
   Blinken.prototype.getStatus = function(group_id, environment_name, environment_url) {
     var self = this;
     $.getJSON(environment_url + "/cgi-bin/icinga/status.cgi?servicestatustypes=20&jsonoutput=1", function(data) {
-      var service_status = data.status.service_status;
-      var critical_entries = service_status.filter(function(o) { return o.status === "CRITICAL" &&
-                                                                        o.has_been_acknowledged === false &&
-                                                                        o.in_scheduled_downtime === false }).length;
-      var warning_entries = service_status.filter(function(o) { return o.status === "WARNING" &&
-                                                                       o.has_been_acknowledged === false &&
-                                                                       o.in_scheduled_downtime === false }).length;
+      var service_status = data.status.service_status.filter(function(o) {
+        return o.has_been_acknowledged === false && o.in_scheduled_downtime === false;
+      });
+      var critical_entries = service_status.filter(function(o) { return o.status === "CRITICAL" }).length;
+      var warning_entries = service_status.filter(function(o) { return o.status === "WARNING" }).length;
       self.setStatus(group_id, environment_name, environment_url, critical_entries, warning_entries);
     });
   };
