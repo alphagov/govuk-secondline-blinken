@@ -44,7 +44,7 @@
 
   Blinken.prototype.getStatus = function(group_id, environment_name, environment_url) {
     var self = this;
-    $.getJSON(environment_url + "/cgi-bin/icinga/status.cgi?servicestatustypes=20&jsonoutput=1", function(data) {
+    $.getJSON(environment_url + "/cgi-bin/icinga/status.cgi?servicestatustypes=28&jsonoutput=1", function(data) {
       var active_service_status = data.status.service_status.filter(function(service_status) {
         return service_status.has_been_acknowledged === false && service_status.in_scheduled_downtime === false;
       });
@@ -54,11 +54,14 @@
       var warning_entries = active_service_status.filter(function(service_status) {
         return service_status.status === "WARNING";
       }).length;
-      self.setStatus(group_id, environment_name, environment_url, critical_entries, warning_entries);
+      var unknown_entries = active_service_status.filter(function(service_status) {
+        return service_status.status === "UNKNOWN";
+      }).length;
+      self.setStatus(group_id, environment_name, environment_url, critical_entries, warning_entries, unknown_entries);
     });
   };
 
-  Blinken.prototype.setStatus = function(group_id, environment_name, environment_url, critical_entries, warning_entries) {
+  Blinken.prototype.setStatus = function(group_id, environment_name, environment_url, critical_entries, warning_entries, unknown_entries) {
     this.status[group_id] = this.status[group_id] || {};
     this.status[group_id][environment_name] = {
       "environment_name": environment_name,
@@ -66,6 +69,7 @@
       "timestamp": (new Date()).toLocaleString("en-GB", { "hour12": false }),
       "critical_entries": critical_entries,
       "warning_entries": warning_entries,
+      "unknown_entries": unknown_entries,
     };
     var environment_count = this.stats[group_id].number_of_environments;
     var environment_status_count = Object.keys(this.status[group_id]).length;
@@ -79,21 +83,24 @@
     this.stats[group_id].order_of_environments.forEach(function(environment_name) {
       var environment = self.status[group_id][environment_name];
       if (environment !== undefined) {
-        var environment_style_class = self.getEnvironmentStyleClass(environment.critical_entries, environment.warning_entries);
+        var environment_style_class = self.getEnvironmentStyleClass(environment.critical_entries, environment.warning_entries, environment.unknown_entries);
         var critical_entries = self.getEntryHTML("critical", "Criticals", environment.critical_entries);
         var warning_entries = self.getEntryHTML("warning", "Warnings", environment.warning_entries);
-        var environment_block = '<a href="' + environment.environment_url + '" target="_blank" class="col-xs-4 blinken-environment ' + environment_style_class + '"><h2>' + environment.environment_name + '</h2><p>' + environment.timestamp + '</p>' + critical_entries + warning_entries + '</a>';
+        var unknown_entries = self.getEntryHTML("unknown", "Unknowns", environment.unknown_entries);
+        var environment_block = '<a href="' + environment.environment_url + '" target="_blank" class="col-xs-4 blinken-environment ' + environment_style_class + '"><h2>' + environment.environment_name + '</h2><p>' + environment.timestamp + '</p>' + critical_entries + warning_entries + unknown_entries + '</a>';
         self.$container.children("#" + group_id).append(environment_block);
       }
     });
   };
 
-  Blinken.prototype.getEnvironmentStyleClass = function(critical_entries, warning_entries) {
+  Blinken.prototype.getEnvironmentStyleClass = function(critical_entries, warning_entries, unknown_entries) {
     if (critical_entries > 0) {
       return "blinken-critical";
     } else if (warning_entries > 0) {
       return "blinken-warning";
-    } else if (critical_entries == 0 && warning_entries == 0) {
+    } else if (unknown_entries > 0) {
+      return "blinken-unknown";
+    } else if (critical_entries == 0 && warning_entries == 0 && unknown_entries == 0) {
       return "blinken-ok";
     } else {
       // For example, if the Icinga service is unreachable
@@ -103,7 +110,7 @@
 
   Blinken.prototype.getEntryHTML = function(entry_type, entry_name, number_of_entries) {
     if (number_of_entries === 0) {
-      return "";
+      return '<div class="blinken-entry"></div>';
     } else {
       return '<div class="blinken-entry blinken-' + entry_type + '-entries"><h3>' + number_of_entries + '</h3><p>' + entry_name + '</p></div>';
     }
