@@ -97,7 +97,7 @@
       return "blinken-ok";
     } else {
       // For example, if the Icinga service is unreachable
-      return "blinken-unknown";
+      return "blinken-unavailable";
     }
   };
 
