@@ -7,6 +7,7 @@
   var icon_colours_rgb = {
     ok: "26, 206, 0",
     warning: "255, 204, 5",
+    unknown: "224, 102, 255",
     critical: "255, 50, 0"
   }
 
