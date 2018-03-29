@@ -1,5 +1,5 @@
 body {
-  min-width: 600px;
+  min-width: 800px;
   background-color: #000;
   color: #fff;
 }
@@ -22,8 +22,9 @@ body {
 
 .blinken-entry {
   color: #fff;
-  position: absolute;
   bottom: 10px;
+  display: inline-block;
+  width: calc(100% / 3);
 }
 
 .blinken-entry h3 {
@@ -32,12 +33,14 @@ body {
 }
 
 .blinken-critical-entries {
-  left: 15px;
   text-align: left;
 }
 
 .blinken-warning-entries {
-  right: 15px;
+  text-align: center;
+}
+
+.blinken-unknown-entries {
   text-align: right;
 }
 
@@ -49,10 +52,14 @@ body {
   background-color: #ffcc05;
 }
 
+.blinken-unknown {
+  background-color: #e066ff;
+}
+
 .blinken-ok {
   background-color: #1ace00;
 }
 
-.blinken-unknown {
+.blinken-unavailable {
   background-color: #ddd;
 }

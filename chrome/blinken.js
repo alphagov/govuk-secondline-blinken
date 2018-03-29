@@ -4,6 +4,12 @@
   var icingaUrls;
   var pollingIntervalMillis = 10000;
   var notificationsEnabled;
+  var icon_colours_rgb = {
+    ok: "26, 206, 0",
+    warning: "255, 204, 5",
+    unknown: "224, 102, 255",
+    critical: "255, 50, 0"
+  }
 
   chrome.notifications.onClicked.addListener(openIcinga);
   run();
@@ -54,7 +60,7 @@
     Object.keys(icingaUrls).forEach(function (environment) {
       var request = new XMLHttpRequest();
       request.onreadystatechange = updateStatus(request, environment);
-      request.open('GET', icingaUrls[environment] + "/cgi-bin/icinga/status.cgi?servicestatustypes=20&jsonoutput=1");
+      request.open('GET', icingaUrls[environment] + "/cgi-bin/icinga/status.cgi?servicestatustypes=28&jsonoutput=1");
       request.send();
     });
   }
@@ -68,11 +74,13 @@
           updatePreviousStatuses();
 
           if (hasStatus(response, "CRITICAL")) {
-            statuses[environment] = "r";
+            statuses[environment] = "critical";
           } else if (hasStatus(response, "WARNING")) {
-            statuses[environment] = "y";
+            statuses[environment] = "warning";
+          } else if (hasStatus(response, "UNKNOWN")) {
+            statuses[environment] = "unknown";
           } else {
-            statuses[environment] = "g";
+            statuses[environment] = "ok";
           }
 
           updateIcon();
@@ -96,34 +104,37 @@
   }
 
   function updateIcon() {
-    var statusString = statuses.production + statuses.staging + statuses.integration;
+    var canvas = document.createElement('canvas');
+    canvas.width = 32;
+    canvas.height = 32;
 
-    if (!statusStringIsValid(statusString)) {
-      statusString = "grey";
-    }
+    var context = canvas.getContext('2d');
 
-    chrome.browserAction.setIcon({path: "chrome/icons/" + statusString + ".png"});
+    context.fillStyle = "#ffffff";
+    context.fill();
+
+    context.fillStyle = iconColour(statuses.production, 1);
+    context.fillRect(0, 0, 32, 16);
+
+    context.fillStyle = iconColour(statuses.staging, 0.85);
+    context.fillRect(0, 16, 21, 16);
+
+    context.fillStyle = iconColour(statuses.integration, 0.7);
+    context.fillRect(21, 16, 11, 16);
+
+    chrome.browserAction.setIcon({
+      imageData: context.getImageData(0, 0, 32, 32)
+    });
   }
 
-  function statusStringIsValid(statusString) {
-    var statusValidation = /[ryg]{3}/;
-    return statusValidation.test(statusString);
+  function iconColour(status, opacity) {
+    var colour = icon_colours_rgb[status] || "128, 128, 128";
+    return `rgba(${colour}, ${opacity})`;
   }
 
   function displayNotification() {
     Object.keys(statuses).forEach(function (environment) {
-      var status;
-      switch(statuses[environment]) {
-        case "r":
-          status = "critical";
-          break;
-        case "y":
-          status = "warning";
-          break;
-        case "g":
-          status = "ok";
-          break;
-      }
+      var status = statuses[environment];
 
       if (shouldNotify(environment, status)) {
         chrome.notifications.create(
