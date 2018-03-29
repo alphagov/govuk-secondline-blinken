@@ -59,7 +59,7 @@
     Object.keys(icingaUrls).forEach(function (environment) {
       var request = new XMLHttpRequest();
       request.onreadystatechange = updateStatus(request, environment);
-      request.open('GET', icingaUrls[environment] + "/cgi-bin/icinga/status.cgi?servicestatustypes=20&jsonoutput=1");
+      request.open('GET', icingaUrls[environment] + "/cgi-bin/icinga/status.cgi?servicestatustypes=28&jsonoutput=1");
       request.send();
     });
   }

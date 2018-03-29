@@ -18,7 +18,7 @@
     }
 
     var notificationsEnabled = ENVIRONMENTS.reduce(function (enabledByEnvironment, environment) {
-      enabledByEnvironment[environment] = ["critical", "warning", "ok"]
+      enabledByEnvironment[environment] = ["critical", "warning", "unknown", "ok"]
         .reduce(function (enabledByStatus, status) {
           enabledByStatus[status] = document.getElementById(environment + "-notification-" + status).checked;
           return enabledByStatus;
