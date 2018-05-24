@@ -1,5 +1,4 @@
 body {
-  min-width: 800px;
   background-color: #000;
   color: #fff;
 }
@@ -14,8 +13,9 @@ body {
   color: #fff;
 }
 
-.col-xs-3 {
+.col-md-3 {
   padding-left: 0;
+  padding-bottom: 15px;
 }
 
 .blinken-environment:hover {
