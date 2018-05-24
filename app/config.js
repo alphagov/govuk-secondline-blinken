@@ -15,6 +15,10 @@ var blinken_config = {
         {
           "name": "Integration",
           "url": "https://alert.integration.publishing.service.gov.uk"
+        },
+        {
+          "name": "CI",
+          "url": "https://ci-alert.integration.publishing.service.gov.uk"
         }
       ]
     }
