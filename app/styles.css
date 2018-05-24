@@ -10,9 +10,13 @@ body {
 
 .blinken-environment {
   display: block;
-  height: 200px;
-  border-right: 10px solid #000;
+  padding: 10px;
   color: #fff;
+}
+
+.col-xs-4 {
+  padding-left: 0;
+  padding-bottom: 15px;
 }
 
 .blinken-environment:hover {

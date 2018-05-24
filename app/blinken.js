@@ -95,7 +95,18 @@
         var critical_entries = self.getEntryHTML("critical", "Criticals", environment.critical_entries);
         var warning_entries = self.getEntryHTML("warning", "Warnings", environment.warning_entries);
         var unknown_entries = self.getEntryHTML("unknown", "Unknowns", environment.unknown_entries);
-        var environment_block = '<a href="' + environment.environment_url + '" target="_blank" class="col-xs-4 blinken-environment ' + environment_style_class + '"><h2>' + environment.environment_name + '</h2><p>' + environment.timestamp + '</p>' + critical_entries + warning_entries + unknown_entries + '</a>';
+
+        var environment_block = '<div class="col-xs-4">' +
+                                '<a href="' + environment.environment_url + '"' +
+                                '   target="_blank"' +
+                                '   class="blinken-environment ' + environment_style_class + '"' +
+                                '>' +
+                                '<h2>' + environment.environment_name + '</h2>' +
+                                '<p>' + environment.timestamp + '</p>' +
+                                critical_entries + warning_entries + unknown_entries +
+                                '</a>' +
+                                '</div>';
+
         self.$container.children("#" + group_id).append(environment_block);
       }
     });
