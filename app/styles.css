@@ -14,9 +14,8 @@ body {
   color: #fff;
 }
 
-.col-xs-4 {
+.col-xs-3 {
   padding-left: 0;
-  padding-bottom: 15px;
 }
 
 .blinken-environment:hover {
