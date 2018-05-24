@@ -96,7 +96,7 @@
         var warning_entries = self.getEntryHTML("warning", "Warnings", environment.warning_entries);
         var unknown_entries = self.getEntryHTML("unknown", "Unknowns", environment.unknown_entries);
 
-        var environment_block = '<div class="col-xs-4">' +
+        var environment_block = '<div class="col-xs-3">' +
                                 '<a href="' + environment.environment_url + '"' +
                                 '   target="_blank"' +
                                 '   class="blinken-environment ' + environment_style_class + '"' +
