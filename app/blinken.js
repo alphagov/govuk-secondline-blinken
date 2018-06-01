@@ -11,10 +11,10 @@
   };
 
   Blinken.prototype.getConfig = function() {
-    var chromeExtensionConfig = chrome &&
-      chrome.extension &&
-      chrome.extension.getBackgroundPage() &&
-      chrome.extension.getBackgroundPage().blinken_config;
+    var chromeExtensionConfig = window.chrome &&
+      window.chrome.extension &&
+      window.chrome.extension.getBackgroundPage() &&
+      window.chrome.extension.getBackgroundPage().blinken_config;
 
     if (chromeExtensionConfig) {
       window.blinken_config = chromeExtensionConfig;
