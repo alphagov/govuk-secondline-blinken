@@ -21,7 +21,7 @@ var blinken_config = {
           "url": "https://ci-alert.integration.publishing.service.gov.uk"
         },
         {
-          "name": "AWS Staging"
+          "name": "AWS Staging",
           "url": "https://alert.staging.govuk.digital"
         }
       ]
