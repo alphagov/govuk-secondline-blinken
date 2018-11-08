@@ -41,16 +41,18 @@ You will need to point the extension at the Icinga alert pages in order to use i
 
 ### Usage
 
-The icon uses the Blinken traffic light system:
+The icon uses the following colour scheme:
 
 - Green means no warnings
+- Purple means some unknown alerts, but no warnings or critical alerts
 - Amber means some warnings, but no critical alerts
 - Red means some critical alerts
 
 The big block across the top of the icon represents Production. The medium-sized one at the bottom-left represents
-Staging, and the small block in the bottom-right represents Integration.
+Staging, and the small block in the bottom-right represents Integration. AWS Staging and Production environments are
+not yet represented in the icon but will be once the majority of applications have been migrated.
 
-Clicking on the icon will open up the Blinken page with more information. Each environment can be clicked to be taken
+Clicking on the icon will open up the BlinkenJS page with more information. Each environment can be clicked to be taken
 to the corresponding Icinga page.  
 
 ### Notifications
