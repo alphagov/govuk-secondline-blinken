@@ -129,7 +129,7 @@
 
   Blinken.prototype.getEntryHTML = function(entry_type, entry_name, number_of_entries) {
     if (number_of_entries === 0) {
-      return '<div class="blinken-entry"></div>';
+      return '<div class="blinken-entry"><h3>&nbsp;</h3><p>&nbsp;</p></div>';
     } else {
       return '<div class="blinken-entry blinken-' + entry_type + '-entries"><h3>' + number_of_entries + '</h3><p>' + entry_name + '</p></div>';
     }
