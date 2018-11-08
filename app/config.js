@@ -17,12 +17,12 @@ var blinken_config = {
           "url": "https://alert.integration.publishing.service.gov.uk"
         },
         {
-          "name": "AWS Staging",
-          "url": "https://alert.blue.staging.govuk.digital"
-        },
-        {
           "name": "AWS Production",
           "url": "https://alert.blue.production.govuk.digital"
+        },
+        {
+          "name": "AWS Staging",
+          "url": "https://alert.blue.staging.govuk.digital"
         },
         {
           "name": "CI",
