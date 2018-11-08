@@ -49,6 +49,18 @@
             {
               "name": "Integration",
               "url": icingaUrls.integration
+            },
+            {
+              "name": "AWS Production",
+              "url": icingaUrls.production_aws
+            },
+            {
+              "name": "AWS Staging",
+              "url": icingaUrls.staging_aws
+            },
+            {
+              "name": "CI",
+              "url": icingaUrls.ci
             }
           ]
         }
