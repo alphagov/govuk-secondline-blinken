@@ -5,6 +5,7 @@ body {
 
 .container-fluid {
   margin: 20px;
+  min-width: 300px;
 }
 
 .blinken-environment {
