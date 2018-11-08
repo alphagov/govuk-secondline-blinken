@@ -3,12 +3,16 @@
   var ENVIRONMENTS = [
     "production",
     "staging",
-    "integration"
+    "integration",
+    "production-aws",
+    "staging-aws",
+    "ci"
   ];
 
   function saveOptions() {
     var icingaUrls = ENVIRONMENTS.reduce(function (urlsByEnvironment, environment) {
-      urlsByEnvironment[environment] = document.getElementById(environment + "-url").value;
+      environmentName = environment.replace("-", "_");
+      urlsByEnvironment[environmentName] = document.getElementById(environment + "-url").value;
       return urlsByEnvironment;
     }, {});
 
