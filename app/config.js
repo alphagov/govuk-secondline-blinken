@@ -5,19 +5,19 @@ var blinken_config = {
       "name": "",
       "environments": [
         {
-          "name": "Production",
+          "name": "Production (Carrenza)",
           "url": "https://alert.publishing.service.gov.uk"
         },
         {
-          "name": "AWS Production",
+          "name": "Production (AWS)",
           "url": "https://alert.blue.production.govuk.digital"
         },
         {
-          "name": "Staging",
+          "name": "Staging (Carrenza)",
           "url": "https://alert.staging.publishing.service.gov.uk"
         },
         {
-          "name": "AWS Staging",
+          "name": "Staging (AWS)",
           "url": "https://alert.blue.staging.govuk.digital"
         },
         {
