@@ -33,7 +33,10 @@
       self.stats[group.id] = self.stats[group.id] || {};
       self.stats[group.id].number_of_environments = 0;
       self.stats[group.id].order_of_environments = [];
-      self.$container.append('<div class="row blinken-group" id="' + group.id + '"><h1>' + group.name + '</h1></div>');
+      self.$container.append('<div class="row blinken-group" id="' + group.id + '">');
+      if (group.name) {
+        self.$container.append('<h1>' + group.name + '</h1></div>');
+      }
       group.environments.forEach(function(environment) {
         self.stats[group.id].number_of_environments++;
         self.stats[group.id].order_of_environments.push(environment.name);
