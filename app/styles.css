@@ -3,6 +3,10 @@ body {
   color: #fff;
 }
 
+h2 {
+  margin: 0;
+}
+
 .container-fluid {
   margin: 20px;
   min-width: 300px;
@@ -28,7 +32,7 @@ body {
   color: #fff;
   bottom: 10px;
   display: inline-block;
-  width: calc(100% / 3);
+  width: 25%;
 }
 
 .blinken-entry h3 {
@@ -37,7 +41,7 @@ body {
 }
 
 .blinken-critical-entries {
-  text-align: left;
+  text-align: center;
 }
 
 .blinken-warning-entries {
@@ -45,7 +49,11 @@ body {
 }
 
 .blinken-unknown-entries {
-  text-align: right;
+  text-align: center;
+}
+
+.blinken-acknowledged-entries {
+  text-align: center;
 }
 
 .blinken-critical {
@@ -58,6 +66,10 @@ body {
 
 .blinken-unknown {
   background-color: #e066ff;
+}
+
+.blinken-acknowledged {
+  background-color: #0E6600;
 }
 
 .blinken-ok {

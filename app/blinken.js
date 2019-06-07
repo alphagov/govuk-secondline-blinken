@@ -61,7 +61,10 @@
         var unknown_entries = active_service_status.filter(function(service_status) {
           return service_status.status === "UNKNOWN";
         }).length;
-        self.setStatus(group_id, environment_name, environment_url, critical_entries, warning_entries, unknown_entries);
+        var acknowledged_entries = data.status.service_status.filter(function(service_status) {
+          return service_status.has_been_acknowledged === true;
+        }).length;
+        self.setStatus(group_id, environment_name, environment_url, critical_entries, warning_entries, unknown_entries, acknowledged_entries);
       },
       error: function() {
         self.setStatus(group_id, environment_name, environment_url, "?", "?", "?");
@@ -69,7 +72,7 @@
     });
   };
 
-  Blinken.prototype.setStatus = function(group_id, environment_name, environment_url, critical_entries, warning_entries, unknown_entries) {
+  Blinken.prototype.setStatus = function(group_id, environment_name, environment_url, critical_entries, warning_entries, unknown_entries, acknowledged_entries) {
     this.status[group_id] = this.status[group_id] || {};
     this.status[group_id][environment_name] = {
       "environment_name": environment_name,
@@ -78,6 +81,7 @@
       "critical_entries": critical_entries,
       "warning_entries": warning_entries,
       "unknown_entries": unknown_entries,
+      "acknowledged_entries": acknowledged_entries,
     };
     var environment_count = this.stats[group_id].number_of_environments;
     var environment_status_count = Object.keys(this.status[group_id]).length;
@@ -91,10 +95,11 @@
     this.stats[group_id].order_of_environments.forEach(function(environment_name) {
       var environment = self.status[group_id][environment_name];
       if (environment !== undefined) {
-        var environment_style_class = self.getEnvironmentStyleClass(environment.critical_entries, environment.warning_entries, environment.unknown_entries);
+        var environment_style_class = self.getEnvironmentStyleClass(environment.critical_entries, environment.warning_entries, environment.unknown_entries, environment.acknowledged_entries);
         var critical_entries = self.getEntryHTML("critical", "Criticals", environment.critical_entries);
         var warning_entries = self.getEntryHTML("warning", "Warnings", environment.warning_entries);
         var unknown_entries = self.getEntryHTML("unknown", "Unknowns", environment.unknown_entries);
+        var acknowledged_entries = self.getEntryHTML("acknowledged", "Acked", environment.acknowledged_entries);
 
         var environment_block = '<div class="col-md-3">' +
                                 '<a href="' + environment.environment_url + '"' +
@@ -103,7 +108,7 @@
                                 '>' +
                                 '<h2>' + environment.environment_name + '</h2>' +
                                 '<p>' + environment.timestamp + '</p>' +
-                                critical_entries + warning_entries + unknown_entries +
+                                critical_entries + warning_entries + unknown_entries + acknowledged_entries +
                                 '</a>' +
                                 '</div>';
 
@@ -112,14 +117,16 @@
     });
   };
 
-  Blinken.prototype.getEnvironmentStyleClass = function(critical_entries, warning_entries, unknown_entries) {
+  Blinken.prototype.getEnvironmentStyleClass = function(critical_entries, warning_entries, unknown_entries, acknowledged_entries) {
     if (critical_entries > 0) {
       return "blinken-critical";
     } else if (warning_entries > 0) {
       return "blinken-warning";
     } else if (unknown_entries > 0) {
       return "blinken-unknown";
-    } else if (critical_entries == 0 && warning_entries == 0 && unknown_entries == 0) {
+    } else if (acknowledged_entries > 0) {
+      return "blinken-acknowledged";
+    } else if (critical_entries == 0 && warning_entries == 0 && unknown_entries == 0 && acknowledged_entries == 0) {
       return "blinken-ok";
     } else {
       // For example, if the Icinga service is unreachable
