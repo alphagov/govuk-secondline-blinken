@@ -106,8 +106,8 @@
                                 '   target="_blank"' +
                                 '   class="blinken-environment ' + environment_style_class + '"' +
                                 '>' +
+                                '<p class="blinken-timestamp">' + environment.timestamp + '</p>' +
                                 '<h2>' + environment.environment_name + '</h2>' +
-                                '<p>' + environment.timestamp + '</p>' +
                                 critical_entries + warning_entries + unknown_entries + acknowledged_entries +
                                 '</a>' +
                                 '</div>';

@@ -35,6 +35,10 @@ h2 {
   width: 25%;
 }
 
+.blinken-timestamp {
+  float: right;
+}
+
 .blinken-entry h3 {
   margin-bottom: 0;
   font-size: 400%;
