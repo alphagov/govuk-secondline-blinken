@@ -59,7 +59,7 @@ to the corresponding Icinga page.
 
 The extension can also display system-wide notifications when the status of an environment changes. Clicking the notification will open the corresponding Icinga page.
 
-These notificatons can be enabled/disabled on the extension settings page. Notifications can be toggled for each environment, and for each status.
+These notifications can be enabled/disabled on the extension settings page. Notifications can be toggled for each environment, and for each status.
 
 [source]: https://github.com/alphagov/blinkenjs/archive/master.zip
 [extensions]: chrome://extensions
