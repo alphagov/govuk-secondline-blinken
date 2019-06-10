@@ -70,7 +70,7 @@
         self.setStatus(group_id, environment_name, environment_url, critical_entries, warning_entries, unknown_entries, acknowledged_entries);
       },
       error: function() {
-        self.setStatus(group_id, environment_name, environment_url, "?", "?", "?");
+        self.setStatus(group_id, environment_name, environment_url, "?", "?", "?", "?");
       }
     });
   };
