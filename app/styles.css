@@ -37,6 +37,8 @@ h2 {
 
 .blinken-timestamp {
   float: right;
+  margin: 0;
+  max-width: 70px;
 }
 
 .blinken-entry {
@@ -44,6 +46,7 @@ h2 {
 }
 
 .blinken-entry h3 {
+  margin-top: 10px;
   margin-bottom: 0;
   font-size: 400%;
 }

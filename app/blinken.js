@@ -70,7 +70,7 @@
         self.setStatus(group_id, environment_name, environment_url, critical_entries, warning_entries, unknown_entries, acknowledged_entries);
       },
       error: function() {
-        self.setStatus(group_id, environment_name, environment_url, "?", "?", "?");
+        self.setStatus(group_id, environment_name, environment_url, "?", "?", "?", "?");
       }
     });
   };
@@ -111,7 +111,9 @@
                                 '>' +
                                 '<p class="blinken-timestamp">' + environment.timestamp + '</p>' +
                                 '<h2>' + environment.environment_name + '</h2>' +
+                                '<div style="clear: right;">' +
                                 critical_entries + warning_entries + unknown_entries + acknowledged_entries +
+                                '</div>' +
                                 '</a>' +
                                 '</div>';
 
@@ -139,7 +141,7 @@
 
   Blinken.prototype.getEntryHTML = function(entry_type, entry_name, number_of_entries) {
     if (number_of_entries === 0) {
-      return '<div class="blinken-entry hidden-xs"><h3>&nbsp;</h3><p>&nbsp;</p></div>';
+      return '<div class="blinken-entry"><h3>&nbsp;</h3><p>&nbsp;</p></div>';
     } else {
       return '<div class="blinken-entry blinken-' + entry_type + '-entries"><h3>' + number_of_entries + '</h3><p>' + entry_name + '</p></div>';
     }
