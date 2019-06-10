@@ -111,7 +111,9 @@
                                 '>' +
                                 '<p class="blinken-timestamp">' + environment.timestamp + '</p>' +
                                 '<h2>' + environment.environment_name + '</h2>' +
+                                '<div style="clear: right;">' +
                                 critical_entries + warning_entries + unknown_entries + acknowledged_entries +
+                                '</div>' +
                                 '</a>' +
                                 '</div>';
 
