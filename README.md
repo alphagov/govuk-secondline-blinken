@@ -37,7 +37,7 @@ After installation you should see a little grey icon in your toolbar. When you d
 
 ### Configuration
 
-You will need to point the extension at the Icinga alert pages in order to use it. To do this, open up your [extensions][extensions], and find the "GOV.UK Blinken" extension. Click "Options". On this page, you should type the Icinga URLs for each environment and click "Save". Once they have been successfully configured, you should see the icon change colour in the corner.
+You will need to point the extension at the Icinga alert pages in order to use it. To do this, open up your [extensions][extensions], and find the "GOV.UK Blinken" extension. Click "Options". On this page, you should type the [Icinga URLs for each environment][icinga-urls] and click "Save". Once they have been successfully configured, you should see the icon change colour in the corner.
 
 ### Usage
 
@@ -63,6 +63,7 @@ These notifications can be enabled/disabled on the extension settings page. Noti
 
 [source]: https://github.com/alphagov/blinkenjs/archive/master.zip
 [extensions]: chrome://extensions
+[icinga-urls]: https://github.com/alphagov/blinkenjs/blob/master/app/config.js
 
 ## Licence
 
