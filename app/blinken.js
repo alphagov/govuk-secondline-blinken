@@ -52,22 +52,27 @@
       url: environment_url + "/cgi-bin/icinga/status.cgi?servicestatustypes=28&jsonoutput=1",
       timeout: 5000,
       success: function(data) {
-        var active_service_status = data.status.service_status.filter(function(service_status) {
-          return service_status.has_been_acknowledged === false && service_status.in_scheduled_downtime === false;
-        });
-        var critical_entries = active_service_status.filter(function(service_status) {
-          return service_status.status === "CRITICAL";
-        }).length;
-        var warning_entries = active_service_status.filter(function(service_status) {
-          return service_status.status === "WARNING";
-        }).length;
-        var unknown_entries = active_service_status.filter(function(service_status) {
-          return service_status.status === "UNKNOWN";
-        }).length;
-        var acknowledged_entries = data.status.service_status.filter(function(service_status) {
-          return service_status.has_been_acknowledged === true;
-        }).length;
-        self.setStatus(group_id, environment_name, environment_url, critical_entries, warning_entries, unknown_entries, acknowledged_entries);
+        if (!data.status) {
+          // request was successfully made but Icinga is down
+          self.setStatus(group_id, environment_name, environment_url, "?", "?", "?", "?");
+        } else {
+          var active_service_status = data.status.service_status.filter(function(service_status) {
+            return service_status.has_been_acknowledged === false && service_status.in_scheduled_downtime === false;
+          });
+          var critical_entries = active_service_status.filter(function(service_status) {
+            return service_status.status === "CRITICAL";
+          }).length;
+          var warning_entries = active_service_status.filter(function(service_status) {
+            return service_status.status === "WARNING";
+          }).length;
+          var unknown_entries = active_service_status.filter(function(service_status) {
+            return service_status.status === "UNKNOWN";
+          }).length;
+          var acknowledged_entries = data.status.service_status.filter(function(service_status) {
+            return service_status.has_been_acknowledged === true;
+          }).length;
+          self.setStatus(group_id, environment_name, environment_url, critical_entries, warning_entries, unknown_entries, acknowledged_entries);
+        }
       },
       error: function() {
         self.setStatus(group_id, environment_name, environment_url, "?", "?", "?", "?");
