@@ -2,17 +2,15 @@
   var DEFAULT_POLLING_INTERVAL_SECS = 10;
   var ENVIRONMENTS = [
     "production",
-    "staging",
     "integration",
-    "production-aws",
-    "staging-aws",
+    "production_aws",
+    "staging_aws",
     "ci"
   ];
 
   function saveOptions() {
     var icingaUrls = ENVIRONMENTS.reduce(function (urlsByEnvironment, environment) {
-      environmentName = environment.replace("-", "_");
-      urlsByEnvironment[environmentName] = document.getElementById(environment + "-url").value;
+      urlsByEnvironment[environment] = document.getElementById(environment + "-url").value;
       return urlsByEnvironment;
     }, {});
 
