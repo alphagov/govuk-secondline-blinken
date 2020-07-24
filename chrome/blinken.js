@@ -121,10 +121,10 @@
     context.fillStyle = "#ffffff";
     context.fill();
 
-    context.fillStyle = iconColour(statuses.production, 1);
+    context.fillStyle = iconColour(statuses.production_aws, 1);
     context.fillRect(0, 0, 32, 16);
 
-    context.fillStyle = iconColour(statuses.staging, 0.85);
+    context.fillStyle = iconColour(statuses.staging_aws, 0.85);
     context.fillRect(0, 16, 21, 16);
 
     context.fillStyle = iconColour(statuses.integration, 0.7);
