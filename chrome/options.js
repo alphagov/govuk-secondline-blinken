@@ -2,7 +2,6 @@
   var DEFAULT_POLLING_INTERVAL_SECS = 10;
   var ENVIRONMENTS = [
     "production",
-    "staging",
     "integration",
     "production-aws",
     "staging-aws",

@@ -13,10 +13,6 @@ var blinken_config = {
           "url": "https://alert.blue.production.govuk.digital"
         },
         {
-          "name": "Staging (Carrenza)",
-          "url": "https://alert.staging.publishing.service.gov.uk"
-        },
-        {
           "name": "Staging (AWS)",
           "url": "https://alert.blue.staging.govuk.digital"
         },

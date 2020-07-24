@@ -43,10 +43,6 @@
               "url": icingaUrls.production
             },
             {
-              "name": "Staging",
-              "url": icingaUrls.staging
-            },
-            {
               "name": "Integration",
               "url": icingaUrls.integration
             },
