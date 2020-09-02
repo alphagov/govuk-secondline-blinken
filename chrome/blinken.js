@@ -39,10 +39,6 @@
           "name": "GOV.UK",
           "environments": [
             {
-              "name": "Production",
-              "url": icingaUrls.production
-            },
-            {
               "name": "Integration",
               "url": icingaUrls.integration
             },

@@ -5,10 +5,6 @@ var blinken_config = {
       "name": "",
       "environments": [
         {
-          "name": "Production (Carrenza)",
-          "url": "https://alert.publishing.service.gov.uk"
-        },
-        {
           "name": "Production (AWS)",
           "url": "https://alert.blue.production.govuk.digital"
         },
