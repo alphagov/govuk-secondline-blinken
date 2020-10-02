@@ -18,7 +18,7 @@ var blinken_config = {
         },
         {
           "name": "CI",
-          "url": "https://ci-alert.integration.publishing.service.gov.uk"
+          "url": "https://alert.blue.integration.govuk.digital"
         }
       ]
     }
