@@ -1,3 +1,5 @@
+This repo was archived in April 2023. The relevant parts were [moved into govuk-technical-2ndline-dashboard](https://github.com/alphagov/govuk-technical-2ndline-dashboard/pull/93).
+
 # BlinkenJS
 
 BlinkenJS is the JavaScript successor to [Blinken](https://github.com/alphagov/blinken). It runs purely in the browser and does not require compiling or running any applications.
